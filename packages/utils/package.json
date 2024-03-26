@@ -1,0 +1,85 @@
+{
+	"name": "@npm-smith/utils",
+	"version": "1.0.3",
+	"description": "Utils to help create npm packages easily",
+	"exports": {
+		"./file": {
+			"require": "./dist/file/index.cjs",
+			"import": "./dist/file/index.js",
+			"types": "./dist/file/index.d.ts"
+		},
+		"./git": {
+			"require": "./dist/git/index.cjs",
+			"import": "./dist/git/index.js",
+			"types": "./dist/git/index.d.ts"
+		},
+		"./common": {
+			"require": "./dist/common/index.cjs",
+			"import": "./dist/common/index.js",
+			"types": "./dist/common/index.d.ts"
+		},
+		"./install": {
+			"require": "./dist/install/index.cjs",
+			"import": "./dist/install/index.js",
+			"types": "./dist/install/index.d.ts"
+		},
+		"./packages": {
+			"require": "./dist/packages/index.cjs",
+			"import": "./dist/packages/index.js",
+			"types": "./dist/packages/index.d.ts"
+		},
+		"./path": {
+			"require": "./dist/path/index.cjs",
+			"import": "./dist/path/index.js",
+			"types": "./dist/path/index.d.ts"
+		}
+	},
+	"typesVersions": {
+		"*": {
+			"common": [
+				"dist/common/index.d.ts"
+			],
+			"file": [
+				"dist/file/index.d.ts"
+			],
+			"git": [
+				"dist/git/index.d.ts"
+			],
+			"install": [
+				"dist/install/index.d.ts"
+			],
+			"packages": [
+				"dist/packages/index.d.ts"
+			],
+			"path": [
+				"dist/path/index.d.ts"
+			]
+		}
+	},
+	"type": "module",
+	"files": [
+		"dist",
+		"README.md",
+		"package.json"
+	],
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"bump": "bump",
+		"pub": "pnpm bump && pnpm build && pnpm publish --no-git-checks"
+	},
+	"keywords": [],
+	"license": "MIT",
+	"dependencies": {
+		"@code-shaper/shaper-utils": "^1.0.5",
+		"@npmcli/package-json": "^5.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.30",
+		"@types/npmcli__package-json": "^4.0.3"
+	}
+}

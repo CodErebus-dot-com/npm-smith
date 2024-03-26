@@ -1,0 +1,14 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"rootDir": ".",
+		"outDir": "dist",
+		"esModuleInterop": true,
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["./bin/*"]
+		}
+	},
+	"include": ["file", "common", "git", "install"],
+	"exclude": ["**/node_modules"]
+}

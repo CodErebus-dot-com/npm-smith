@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"rootDir": "bin",
+		"outDir": "dist",
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["./bin/*"]
+		},
+		"types": ["node"],
+		"moduleResolution": "Bundler",
+		"module": "ESNext",
+		"forceConsistentCasingInFileNames": true,
+		"skipLibCheck": true,
+		"allowJs": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"allowUnreachableCode": false,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"useUnknownInCatchVariables": false,
+		"alwaysStrict": true,
+		"noImplicitReturns": true
+	},
+	"include": ["bin"],
+	"exclude": ["**/node_modules"]
+}
