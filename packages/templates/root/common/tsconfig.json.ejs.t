@@ -1,15 +1,12 @@
 {
 	"compilerOptions": {
-		"rootDir": "bin",
+		"rootDir": "{{initType}}",
 		"outDir": "dist",
 		"baseUrl": "./",
-		"paths": {
-			"@/*": ["./bin/*"]
-		},
+		"paths": {},
 		"types": ["node"],
 		"moduleResolution": "Bundler",
 		"module": "ESNext",
-		"lib": ["ES2021", "DOM"],
 		"forceConsistentCasingInFileNames": true,
 		"skipLibCheck": true,
 		"allowJs": true,
@@ -27,6 +24,6 @@
 		"alwaysStrict": true,
 		"noImplicitReturns": true
 	},
-	"include": ["bin"],
+	"include": ["{{initType}}"],
 	"exclude": ["**/node_modules"]
 }

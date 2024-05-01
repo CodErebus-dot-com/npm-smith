@@ -1,0 +1,27 @@
+{
+	"name": "@npm-smith/templates",
+	"version": "1.1.2-beta0.3",
+	"description": "Templates that npm-smith uses",
+	"type": "module",
+	"files": [
+		"README.md",
+		"package.json",
+		"cli",
+		"common",
+		"lib",
+		"packageJson",
+		"root"
+	],
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"scripts": {
+		"bump": "bump",
+		"pub": "pnpm bump && pnpm publish --no-git-checks"
+	},
+	"keywords": [],
+	"license": "MIT",
+	"dependencies": {},
+	"devDependencies": {}
+}
