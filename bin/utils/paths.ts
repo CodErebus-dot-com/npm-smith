@@ -17,4 +17,8 @@ export const TEMPLATES_ROOT_STANDALONE = path.join(
 );
 export const TEMPLATES_ROOT_COMMON = path.join(TEMPLATES_ROOT, 'common');
 export const TEMPLATES_PACKAGE_JSON = path.join(TEMPLATES_DIR, 'packageJson');
+export const TEMPLATES_PACKAGE_JSON_STANDALONE = path.join(
+	TEMPLATES_PACKAGE_JSON,
+	'standalone',
+);
 export const PACKAGE_JSON = path.join(ROOT_DIR, 'package.json');

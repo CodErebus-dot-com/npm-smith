@@ -10,6 +10,7 @@ import {
 	TEMPLATES_COMMON,
 	TEMPLATES_DIR,
 	TEMPLATES_PACKAGE_JSON,
+	TEMPLATES_PACKAGE_JSON_STANDALONE,
 	TEMPLATES_ROOT_COMMON,
 	TEMPLATES_ROOT_STANDALONE,
 } from './paths';
@@ -34,10 +35,23 @@ const copyTemplate = (
 const createPackageJson = async (
 	packageName: string,
 	dstPath: string,
+	setupType: SETUP_TYPE,
 ): Promise<void> => {
 	const commonPackageJson = await PackageJson.load(TEMPLATES_PACKAGE_JSON);
 	const packageJson = await PackageJson.load(packageName);
-	const mergedContent = _.merge(commonPackageJson.content, packageJson.content);
+	let mergedContent: PackageJson.Content = {};
+
+	if (setupType === 'standalone') {
+		const standalonePackageJson = await PackageJson.load(
+			TEMPLATES_PACKAGE_JSON_STANDALONE,
+		);
+		mergedContent = _.merge(
+			commonPackageJson.content,
+			standalonePackageJson.content,
+			packageJson.content,
+		);
+	}
+	mergedContent = _.merge(commonPackageJson.content, packageJson.content);
 
 	packageJson.update(mergedContent);
 	await packageJson.save();

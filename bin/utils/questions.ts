@@ -1,9 +1,12 @@
 import * as p from '@clack/prompts';
 import { validate } from '@npm-smith/utils/common';
+import { getDestinationDirectories } from '@npm-smith/utils/file';
 import { identifyPackageManager } from '@npm-smith/utils/packages';
+import { ROOT_DIR } from '@npm-smith/utils/path';
 import * as emoji from 'node-emoji';
 import color from 'picocolors';
 import {
+	DestinationOption,
 	INIT_TYPE,
 	PACKAGE_MANAGER,
 	PkgManagerOption,
@@ -24,6 +27,12 @@ function createPkgManagerOptions<T extends PkgManagerOption>(
 }
 
 function createSetupOptions<T extends SetupOption>(options: T[]): T[] {
+	return options;
+}
+
+function createDestinationOptions<T extends DestinationOption>(
+	options: T[],
+): T[] {
 	return options;
 }
 
@@ -65,8 +74,8 @@ export const pkgManagerOptions = createPkgManagerOptions([
 
 export const setupOptions = createSetupOptions([
 	{
-		value: 'monorepo',
-		label: 'Monorepo',
+		value: 'integrated',
+		label: 'Integrated',
 		hint: 'comes with only the necessary development configuration',
 	},
 	{
@@ -76,15 +85,40 @@ export const setupOptions = createSetupOptions([
 	},
 ]);
 
-export const renderQuestions = async (): Promise<QUESTIONS> => {
+const destinationDirectories = getDestinationDirectories(ROOT_DIR);
+console.log('destinationDirectories ', destinationDirectories);
+export const destinationOptions = createDestinationOptions(
+	destinationDirectories.map((directory: string) => ({
+		value: directory,
+		label: directory,
+		hint: '',
+	})),
+);
+
+export const renderQuestions = async (
+	isStandalone: boolean,
+): Promise<QUESTIONS> => {
 	return await p.group(
 		{
-			packageName: async () =>
-				await p.text({
+			isScoped: async () =>
+				(await p.confirm({
+					message:
+						'Is this going to be a scoped package? (visit https://docs.npmjs.com/cli/v10/using-npm/scope for more info)',
+					initialValue: true,
+				})) as boolean,
+			packageName: async ({ results }: { results: Partial<QUESTIONS> }) =>
+				(await p.text({
 					message: 'What is going to be your package name?',
-					initialValue: './my-package',
+					initialValue: results.isScoped ? '@my-org/my-package' : 'my-package',
 					validate,
-				}),
+				})) as string,
+			destination: async () =>
+				!isStandalone && destinationDirectories.length
+					? ((await p.select({
+							message: 'Where do you want to create the new package?',
+							options: destinationOptions,
+						})) as string)
+					: '',
 			initType: async () =>
 				(await p.select<PresetOption[], string>({
 					message: 'What type of npm package do you want to create?',
@@ -93,7 +127,7 @@ export const renderQuestions = async (): Promise<QUESTIONS> => {
 			setupType: async () =>
 				(await p.select<SetupOption[], string>({
 					message:
-						'Is this package being set up as part of a monorepo or as a standalone project?',
+						'Is this package being set up as part of an integrated or as a standalone project?',
 					options: setupOptions,
 				})) as SETUP_TYPE,
 			pkgManager: async () =>
