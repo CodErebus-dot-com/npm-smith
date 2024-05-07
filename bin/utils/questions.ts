@@ -2,7 +2,6 @@ import * as p from '@clack/prompts';
 import { validate } from '@npm-smith/utils/common';
 import { getDestinationDirectories } from '@npm-smith/utils/file';
 import { identifyPackageManager } from '@npm-smith/utils/packages';
-import { ROOT_DIR } from '@npm-smith/utils/path';
 import * as emoji from 'node-emoji';
 import color from 'picocolors';
 import {
@@ -85,8 +84,12 @@ export const setupOptions = createSetupOptions([
 	},
 ]);
 
-const destinationDirectories = getDestinationDirectories(ROOT_DIR);
-console.log('destinationDirectories ', destinationDirectories);
+const destinationDirectories = getDestinationDirectories(
+	undefined,
+	undefined,
+	'single',
+);
+
 export const destinationOptions = createDestinationOptions(
 	destinationDirectories.map((directory: string) => ({
 		value: directory,
@@ -106,12 +109,11 @@ export const renderQuestions = async (
 						'Is this going to be a scoped package? (visit https://docs.npmjs.com/cli/v10/using-npm/scope for more info)',
 					initialValue: true,
 				})) as boolean,
-			packageName: async ({ results }: { results: Partial<QUESTIONS> }) =>
-				(await p.text({
-					message: 'What is going to be your package name?',
-					initialValue: results.isScoped ? '@my-org/my-package' : 'my-package',
-					validate,
-				})) as string,
+			initType: async () =>
+				(await p.select<PresetOption[], string>({
+					message: 'What type of npm package do you want to create?',
+					options: presetOptions,
+				})) as INIT_TYPE,
 			destination: async () =>
 				!isStandalone && destinationDirectories.length
 					? ((await p.select({
@@ -119,11 +121,12 @@ export const renderQuestions = async (
 							options: destinationOptions,
 						})) as string)
 					: '',
-			initType: async () =>
-				(await p.select<PresetOption[], string>({
-					message: 'What type of npm package do you want to create?',
-					options: presetOptions,
-				})) as INIT_TYPE,
+			packageName: async ({ results }: { results: Partial<QUESTIONS> }) =>
+				await p.text({
+					message: 'What is going to be your package name?',
+					initialValue: results.isScoped ? '@my-org/my-package' : 'my-package',
+					validate,
+				}),
 			setupType: async () =>
 				(await p.select<SetupOption[], string>({
 					message:

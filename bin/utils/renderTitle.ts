@@ -1,3 +1,4 @@
+import { identifyPackageManager } from '@npm-smith/utils/packages';
 import sa from 'shell-artist';
 
 // colors brought in from vscode poimandres theme
@@ -18,11 +19,11 @@ export const renderTitle = async (): Promise<void> => {
 	);
 
 	// resolves weird behavior where the ascii is offset
-	// const pkgManager = getUserPkgManager();
-	// if (pkgManager === "yarn" || pkgManager === "pnpm") {
-	//   console.log("");
-	// }
-	// sa.log('Welcome to', { center: true });
+	const pkgManager = identifyPackageManager();
+	if (pkgManager === 'yarn' || pkgManager === 'pnpm') {
+		console.log('');
+	}
+
 	sa.log(devKitGradient, {
 		box: {
 			title: 'Welcome to',

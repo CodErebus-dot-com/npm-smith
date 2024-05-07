@@ -4,7 +4,7 @@ const validationRegExp =
 	/^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
 
 //Validate a string against allowed package.json names
-export const validateAppName = (rawInput: string): string | undefined => {
+export const validate = (rawInput: string): string | undefined => {
 	const input = removeTrailingSlash(rawInput);
 	const paths = input.split('/');
 
@@ -15,7 +15,6 @@ export const validateAppName = (rawInput: string): string | undefined => {
 	if (paths.findIndex(p => p.startsWith('@')) !== -1) {
 		appName = paths.slice(indexOfDelimiter).join('/');
 	}
-
 	if (input === '.' || validationRegExp.test(appName ?? '')) {
 		return;
 	} else {

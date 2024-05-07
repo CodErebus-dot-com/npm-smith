@@ -20,11 +20,11 @@ function isEmptyDir(directoryPath?: string): boolean {
  * @param {string} path : path of file or directory
  * @returns {boolean} true if directory else false
  */
-function isDirectory(path: string): boolean | undefined {
+function isDirectory(path: string): boolean {
 	if (fs.existsSync(path)) {
 		return fs.statSync(path).isDirectory();
 	}
-	return;
+	return false;
 }
 
 /**

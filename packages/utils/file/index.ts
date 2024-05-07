@@ -1,3 +1,4 @@
+export * from './cache';
 export * from './dirOps';
 export { getDestinationDirectories } from './getDestinationDirectories';
 export { readAndParseFile } from './readAndParseFile';

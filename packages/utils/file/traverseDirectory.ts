@@ -4,18 +4,23 @@ import { isDirectory } from './dirOps';
 
 export const traverseDirectory = (
 	currentDirOrFile: string,
-	fileOperation: (filePath: string) => void,
+	fileOperation?: (filePath: string) => void,
+	dirOperation?: (dirPath: string) => void,
+	iteration: 'single' | 'recursive' = 'recursive',
 ): void => {
-	if (isDirectory(currentDirOrFile)) {
-		fs.readdirSync(currentDirOrFile).forEach(file => {
-			const filePath = path.join(currentDirOrFile, file);
-			if (!isDirectory(currentDirOrFile)) {
-				fileOperation(filePath);
-			} else if (isDirectory(currentDirOrFile)) {
-				traverseDirectory(filePath, fileOperation);
+	const dirContent = fs.readdirSync(currentDirOrFile);
+
+	dirContent.forEach(item => {
+		const itemPath = path.join(currentDirOrFile, item);
+
+		if (isDirectory(itemPath)) {
+			dirOperation && dirOperation(itemPath);
+
+			if (iteration === 'recursive') {
+				traverseDirectory(itemPath, fileOperation, dirOperation, iteration);
 			}
-		});
-	} else {
-		fileOperation(currentDirOrFile);
-	}
+		} else if (fileOperation) {
+			fileOperation(itemPath);
+		}
+	});
 };
