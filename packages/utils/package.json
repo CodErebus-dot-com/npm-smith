@@ -1,6 +1,6 @@
 {
 	"name": "@npm-smith/utils",
-	"version": "1.1.2",
+	"version": "1.1.4",
 	"description": "Utils to help create npm packages easily",
 	"exports": {
 		"./file": {
@@ -27,11 +27,6 @@
 			"require": "./dist/packages/index.cjs",
 			"import": "./dist/packages/index.js",
 			"types": "./dist/packages/index.d.ts"
-		},
-		"./path": {
-			"require": "./dist/path/index.cjs",
-			"import": "./dist/path/index.js",
-			"types": "./dist/path/index.d.ts"
 		}
 	},
 	"typesVersions": {
@@ -50,9 +45,6 @@
 			],
 			"packages": [
 				"dist/packages/index.d.ts"
-			],
-			"path": [
-				"dist/path/index.d.ts"
 			]
 		}
 	},
@@ -76,10 +68,12 @@
 	"license": "MIT",
 	"dependencies": {
 		"@code-shaper/shaper-utils": "^1.0.5",
-		"@npmcli/package-json": "^5.0.0"
+		"@npmcli/package-json": "^5.0.0",
+		"js-yaml": "^4.1.0"
 	},
 	"devDependencies": {
 		"@types/node": "^20.11.30",
-		"@types/npmcli__package-json": "^4.0.3"
+		"@types/npmcli__package-json": "^4.0.3",
+		"@types/js-yaml": "^4.0.9"
 	}
 }

@@ -1,6 +1,6 @@
 import { execTransformFiles } from '@npm-smith/utils/common';
 import { renameSync, traverseDirectory } from '@npm-smith/utils/file';
-import { execute } from '@npm-smith/utils/install';
+import { handleWorkspaces, sortPackageJson } from '@npm-smith/utils/packages';
 import PackageJson from '@npmcli/package-json';
 import fs from 'fs-extra';
 import _ from 'lodash';
@@ -32,13 +32,12 @@ const copyTemplate = (
 	execTransformFiles(path.join(TEMPLATES_PACKAGE_JSON, initType), dstPath);
 };
 
-const createPackageJson = async (
-	packageName: string,
+const updatePackageJson = async (
 	dstPath: string,
 	setupType: SETUP_TYPE,
 ): Promise<void> => {
 	const commonPackageJson = await PackageJson.load(TEMPLATES_PACKAGE_JSON);
-	const packageJson = await PackageJson.load(packageName);
+	const packageJson = await PackageJson.load(dstPath);
 	let mergedContent: PackageJson.Content = {};
 
 	if (setupType === 'standalone') {
@@ -55,7 +54,8 @@ const createPackageJson = async (
 
 	packageJson.update(mergedContent);
 	await packageJson.save();
-	execute('npx sort-package-json', { cwd: dstPath });
+	await handleWorkspaces();
+	sortPackageJson(dstPath);
 };
 
 const RENAMING_CACHE_FILE = 'renamedCache.json'; // Name of the cache file
@@ -102,4 +102,4 @@ const renameTemplates = (sourcePath: string): void => {
 	saveRenamedCache();
 };
 
-export { copyTemplate, createPackageJson, loadRenamedCache, renameTemplates };
+export { copyTemplate, loadRenamedCache, renameTemplates, updatePackageJson };

@@ -6,10 +6,10 @@ import {
 	PNPM_LOCK,
 	YARN_LOCK,
 } from '../constants';
-import { ROOT_DIR } from '../path';
 import { PACKAGE_MANAGER } from '../types';
 
 export const identifyPackageManager = (): PACKAGE_MANAGER | undefined => {
+	const ROOT_DIR = process.cwd();
 	const packageLock = path.join(ROOT_DIR, PACKAGE_LOCK);
 	const pnpmLock = path.join(ROOT_DIR, PNPM_LOCK);
 	const yarnLock = path.join(ROOT_DIR, YARN_LOCK);

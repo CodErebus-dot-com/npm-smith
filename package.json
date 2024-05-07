@@ -1,6 +1,6 @@
 {
 	"name": "npm-smith",
-	"version": "0.0.1-beta2.7",
+	"version": "0.0.2-beta.2",
 	"description": "The only npmsmith you need to help you create npm packages",
 	"bin": {
 		"npm-smith": "dist/index.js"
@@ -35,11 +35,12 @@
 		"registry": "https://registry.npmjs.org/"
 	},
 	"scripts": {
+		"build:prod": "tsup --env.NODE_ENV production",
 		"build": "tsup",
 		"dev": "tsup --watch",
 		"clean": "rimraf dist node_modules",
 		"bump": "bump",
-		"pub": "pnpm bump && pnpm build && pnpm publish --no-git-checks",
+		"pub": "pnpm bump && pnpm build:prod && pnpm publish --no-git-checks",
 		"lint": "eslint . --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0",
 		"lint:fix": "eslint . --ext ts,tsx,js,jsx --report-unused-disable-directives --max-warnings 0 --fix",
 		"check-types": "tsc --noEmit",
@@ -55,8 +56,9 @@
 		"@clack/prompts": "^0.7.0",
 		"@code-shaper/shaper-utils": "^1.0.5",
 		"@npm-smith/templates": "1.1.2-beta0.4",
-		"@npm-smith/utils": "1.1.2",
+		"@npm-smith/utils": "1.1.4",
 		"@npmcli/package-json": "^5.0.0",
+		"js-yaml": "^4.1.0",
 		"lodash": "^4.17.21",
 		"node-emoji": "^2.1.0",
 		"picocolors": "^1.0.0",
@@ -68,6 +70,7 @@
 		"@commitlint/config-conventional": "19.1.0",
 		"@jsdevtools/version-bump-prompt": "6.1.0",
 		"@types/fs-extra": "^11.0.4",
+		"@types/js-yaml": "^4.0.9",
 		"@types/lodash": "^4.17.0",
 		"@types/node": "^20.11.30",
 		"@types/npmcli__package-json": "^4.0.3",

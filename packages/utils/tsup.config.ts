@@ -1,4 +1,4 @@
-import type { Options } from 'tsup'
+import type { Options } from 'tsup';
 
 export const tsup: Options = {
 	clean: true,
@@ -13,10 +13,9 @@ export const tsup: Options = {
 		'common/index': 'common/index.ts',
 		'install/index': 'install/index.ts',
 		'packages/index': 'packages/index.ts',
-		'path/index': 'path/index.ts',
 	},
 	outDir: 'dist',
 	target: 'es2020',
 	treeshake: true,
 	splitting: true,
-}
+};
