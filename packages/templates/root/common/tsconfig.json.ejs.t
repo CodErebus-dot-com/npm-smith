@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"rootDir": "{{initType}}",
+		"rootDir": "{{folderType}}",
 		"outDir": "dist",
 		"baseUrl": "./",
 		"paths": {},
@@ -24,6 +24,6 @@
 		"alwaysStrict": true,
 		"noImplicitReturns": true
 	},
-	"include": ["{{initType}}"],
+	"include": ["{{folderType}}"],
 	"exclude": ["**/node_modules"]
 }

@@ -1,6 +1,6 @@
 {
 	"name": "npm-smith",
-	"version": "0.0.2-beta.2",
+	"version": "0.0.2-beta.4",
 	"description": "The only npmsmith you need to help you create npm packages",
 	"bin": {
 		"npm-smith": "dist/index.js"
@@ -55,8 +55,8 @@
 	"dependencies": {
 		"@clack/prompts": "^0.7.0",
 		"@code-shaper/shaper-utils": "^1.0.5",
-		"@npm-smith/templates": "1.1.2-beta0.4",
-		"@npm-smith/utils": "1.1.4",
+		"@npm-smith/templates": "1.1.2-beta.5",
+		"@npm-smith/utils": "1.1.5",
 		"@npmcli/package-json": "^5.0.0",
 		"js-yaml": "^4.1.0",
 		"lodash": "^4.17.21",

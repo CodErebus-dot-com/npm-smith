@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import { traverseDirectory } from './traverseDirectory';
 
 export const replaceStringInFiles = (
-	inputDirOrFile: string,
+	fileOrFolderPath: string,
 	regexStr: string | RegExp,
 	replacedStr: string,
 ): void => {
@@ -14,5 +14,5 @@ export const replaceStringInFiles = (
 		fs.writeFileSync(filePath, content, 'utf-8');
 	};
 
-	traverseDirectory(inputDirOrFile, replaceString);
+	traverseDirectory(fileOrFolderPath, replaceString);
 };

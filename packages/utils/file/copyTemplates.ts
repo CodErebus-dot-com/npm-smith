@@ -1,19 +1,18 @@
 import { FileUtils } from '@code-shaper/shaper-utils';
 import fs from 'fs-extra';
-import path from 'path';
-import { traverseDirectory } from '../file/traverseDirectory';
+import { traverseDirectory } from './traverseDirectory';
 
 const { transformFiles } = FileUtils;
 
-export const execTransformFiles = (
-	src: string,
-	dst: string,
+export const copyTemplates = (
+	srcPath: string,
+	dstPath: string,
 	additionalEndsWith?: string[],
 ): void => {
 	const ogConsole = console.log;
 
 	console.log = () => {};
-	transformFiles(src, dst, {});
+	transformFiles(srcPath, dstPath, {});
 
 	if (additionalEndsWith && additionalEndsWith.length > 0) {
 		const renameTmpFiles = (filePath: string): void => {
@@ -25,8 +24,7 @@ export const execTransformFiles = (
 			});
 		};
 
-		const templatesDir = path.join(dst, 'templates');
-		traverseDirectory(templatesDir, renameTmpFiles);
+		traverseDirectory(dstPath, renameTmpFiles);
 	}
 
 	console.log(); // empty log

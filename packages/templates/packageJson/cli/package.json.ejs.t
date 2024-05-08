@@ -3,6 +3,8 @@
 	"scripts": {},
 	"keywords": ["cli"],
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"@clack/prompts": "^0.7.0"
+	},
 	"devDependencies": {}
 }

@@ -14,9 +14,14 @@
 	"keywords": ["npm", "package", "module"],
 	"license": "MIT",
 	"dependencies": {
-		"@npmcli/package-json": "^5.0.0",
-		"fs-extra": "^11.2.0",
-		"rimraf": "^5.0.5"
+		"@code-shaper/shaper-utils": "^1.0.5",
+    "@npmcli/package-json": "^5.0.0",
+    "@npm-smith/utils": "^1.1.5",
+    "fs-extra": "^11.2.0",
+    "node-emoji": "^2.1.0",
+    "picocolors": "^1.0.0",
+		"rimraf": "^5.0.5",
+    "shell-artist": "^2.7.2"
 	},
 	"devDependencies": {
 		"@jsdevtools/version-bump-prompt": "6.1.0",

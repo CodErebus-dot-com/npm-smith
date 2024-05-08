@@ -9,7 +9,7 @@ import { traverseDirectory } from './traverseDirectory';
  */
 export const getDestinationDirectories = (
 	exclusions: string[] = [],
-	rootDir: string = process.cwd(),
+	fileOrFolderPath: string = process.cwd(),
 	iteration?: 'single' | 'recursive',
 ): string[] => {
 	const directories: string[] = [];
@@ -23,6 +23,6 @@ export const getDestinationDirectories = (
 		}
 	};
 
-	traverseDirectory(rootDir, undefined, collectDirectories, iteration);
+	traverseDirectory(fileOrFolderPath, undefined, collectDirectories, iteration);
 	return directories;
 };

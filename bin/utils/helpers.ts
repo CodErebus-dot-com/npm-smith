@@ -1,5 +1,8 @@
-import { execTransformFiles } from '@npm-smith/utils/common';
-import { renameSync, traverseDirectory } from '@npm-smith/utils/file';
+import {
+	copyTemplates,
+	renameSync,
+	traverseDirectory,
+} from '@npm-smith/utils/file';
 import { handleWorkspaces, sortPackageJson } from '@npm-smith/utils/packages';
 import PackageJson from '@npmcli/package-json';
 import fs from 'fs-extra';
@@ -21,15 +24,15 @@ const copyTemplate = (
 	initType: INIT_TYPE,
 	setupType: SETUP_TYPE,
 ): void => {
-	execTransformFiles(srcPath, dstPath);
-	execTransformFiles(
+	copyTemplates(srcPath, dstPath);
+	copyTemplates(
 		TEMPLATES_COMMON,
 		path.join(dstPath, initType === 'cli' ? 'bin' : 'src'),
 	);
 	setupType === 'standalone' &&
-		execTransformFiles(TEMPLATES_ROOT_STANDALONE, dstPath);
-	execTransformFiles(TEMPLATES_ROOT_COMMON, dstPath);
-	execTransformFiles(path.join(TEMPLATES_PACKAGE_JSON, initType), dstPath);
+		copyTemplates(TEMPLATES_ROOT_STANDALONE, dstPath);
+	copyTemplates(TEMPLATES_ROOT_COMMON, dstPath);
+	copyTemplates(path.join(TEMPLATES_PACKAGE_JSON, initType), dstPath);
 };
 
 const updatePackageJson = async (

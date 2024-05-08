@@ -3,15 +3,15 @@ import path from 'path';
 import { isDirectory } from './dirOps';
 
 export const traverseDirectory = (
-	currentDirOrFile: string,
+	fileOrFolderPath: string,
 	fileOperation?: (filePath: string) => void,
 	dirOperation?: (dirPath: string) => void,
 	iteration: 'single' | 'recursive' = 'recursive',
 ): void => {
-	const dirContent = fs.readdirSync(currentDirOrFile);
+	const dirContent = fs.readdirSync(fileOrFolderPath);
 
 	dirContent.forEach(item => {
-		const itemPath = path.join(currentDirOrFile, item);
+		const itemPath = path.join(fileOrFolderPath, item);
 
 		if (isDirectory(itemPath)) {
 			dirOperation && dirOperation(itemPath);

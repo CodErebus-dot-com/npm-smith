@@ -6,7 +6,7 @@ const ROOT_DIR = process.cwd();
 const __dirname = path.dirname(__filename);
 const TEMPLATES_DIR =
 	process.env.NODE_ENV === 'production'
-		? path.join(__dirname, '..', '..', '..', '@npm-smith', 'templates')
+		? path.join(__dirname, '..', '..', '@npm-smith', 'templates')
 		: path.join(__dirname, '..', 'templates');
 const TEMPLATES_COMMON = path.join(TEMPLATES_DIR, 'common');
 const TEMPLATES_ROOT = path.join(TEMPLATES_DIR, 'root');

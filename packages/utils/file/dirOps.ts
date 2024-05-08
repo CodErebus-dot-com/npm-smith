@@ -17,12 +17,12 @@ function isEmptyDir(directoryPath?: string): boolean {
 
 /**
  * @description : method to check if given path is directory or not
- * @param {string} path : path of file or directory
+ * @param {string} fileOrFolderPath : path of file or directory
  * @returns {boolean} true if directory else false
  */
-function isDirectory(path: string): boolean {
-	if (fs.existsSync(path)) {
-		return fs.statSync(path).isDirectory();
+function isDirectory(fileOrFolderPath: string): boolean {
+	if (fs.existsSync(fileOrFolderPath)) {
+		return fs.statSync(fileOrFolderPath).isDirectory();
 	}
 	return false;
 }
@@ -69,11 +69,11 @@ function deleteFile(filePath: string): void {
 
 /**
  * @description : method to create folder name
- * @param {string} dir : folder name
+ * @param {string} dirName : folder name
  */
-function createDir(dir: string): void {
+function createDir(dirName: string): void {
 	try {
-		fs.mkdirSync(dir);
+		fs.mkdirSync(dirName);
 	} catch (e) {
 		console.error(color.red('error creating directory'));
 		throw e;

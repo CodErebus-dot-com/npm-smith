@@ -8,7 +8,7 @@ export const tsup: Options = {
 	skipNodeModulesBundle: true,
 	format: ['cjs', 'esm'],
 	entry: {
-		index: '{{initType}}/index.ts',
+		index: '{{folderType}}/index.ts',
 	},
 	outDir: 'dist',
 	target: 'es2020',

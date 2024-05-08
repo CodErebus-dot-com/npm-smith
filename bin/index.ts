@@ -53,7 +53,11 @@ async function main(): Promise<void> {
 	createDir(dstPath);
 	copyTemplate(srcPath, dstPath, initType, setupType); // copy templates to destination
 	await updatePackageJson(dstPath, setupType); // merge and update package.json files
-	replaceStringInFiles(dstPath, '{{initType}}', initType);
+	replaceStringInFiles(
+		dstPath,
+		'{{folderType}}',
+		initType === 'cli' ? 'bin' : 'src',
+	);
 	replaceStringInFiles(
 		dstPath,
 		'{{packageName}}',

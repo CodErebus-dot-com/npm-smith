@@ -1,4 +1,5 @@
 export * from './cache';
+export { copyTemplates } from './copyTemplates';
 export * from './dirOps';
 export { getDestinationDirectories } from './getDestinationDirectories';
 export { readAndParseFile } from './readAndParseFile';
